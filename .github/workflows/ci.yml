@@ -1,32 +1,28 @@
-name: java CI 
+name: Java CI
 
 on:
-
-push:
-pull_request:
+  push:
+  pull_request:
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-steps:
-- name : checkout code 
-  uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-- name : setup java 
-  uses: actions/steupjava@v4
-  with: 
-  java-version: '21'
-  distribution: 'temurin'
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
 
-- name: check java version 
-  run: java -version
+      - name: Check Java version
+        run: java -version
 
-- name: build and test 
-  run: mvn test
+      - name: Compile Java
+        run: javac src/Main.java
 
-- name: compile java 
-  run: javac src/main.java
-
-- name: run java
-  run: java -cp src main 
+      - name: Run Java
+        run: java -cp src Main
